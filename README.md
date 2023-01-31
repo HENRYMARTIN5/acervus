@@ -48,7 +48,7 @@ The ISO will be built in tmpfs, then copied to your current directory.
 
 See `packages.txt` for full details. As of Jan 31, 2023, there are 153 packages.
 
-A couple of hilights:
+A couple of highlights:
 - A full Budgie desktop environment
 - A ton of web browsers including Firefox, Brave, and Tor
 - A lot of fonts
