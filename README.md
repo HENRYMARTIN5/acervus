@@ -34,6 +34,14 @@ And clone the repo:
 ```bash
 git clone https://github.com/HENRYMARTIN5/acervus.git
 cd acervus
+chmod 777 * # Make sure file perms are correct
+```
+
+And of course, the command to do all of that automagically is:
+
+```bash
+pacman -Sy sudo git wget curl archiso pacman-contrib squashfs-tools && pacman-key --init && pacman-key --recv-key FBA220DFC880C036 --keyserver keyserver.ubuntu.com && pacman-key --lsign-key FBA220DFC880C036 && pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst' && echo "[chaotic-aur]
+Include = /etc/pacman.d/chaotic-mirrorlist" >> /etc/pacman.conf && git clone https://github.com/HENRYMARTIN5/acervus.git && cd acervus && chmod 777 *
 ```
 
 Then run:
