@@ -42,7 +42,7 @@ Then run:
 ./buildiso.sh
 ```
 
-The ISO will be built in tmpfs, then copied to your current directory.
+The ISO will be built in a temporary folder (which you can delete once you're done), then copied to your current directory.
 
 ## What packages are installed?
 

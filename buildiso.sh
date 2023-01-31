@@ -60,6 +60,6 @@ echo "unload-module module-role-cork" > ./airootfs/etc/pulse/default.pa.d/no-cor
 echo "Done."
 echo "Running mkarchiso on generated config..."
 # Make the actual iso
-mkarchiso -v -w /tmp/acervusiso-tmp $(pwd)
+mkarchiso -v -w ./acervus-iso-tmp $(pwd)
 cd ..
 echo "Done building Acervus. ISO should be located in current directory."
