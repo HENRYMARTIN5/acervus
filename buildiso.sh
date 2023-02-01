@@ -10,7 +10,7 @@ echo "Done."
 cat > ./airootfs/etc/lsb-release << "EOF"
 DISTRIB_ID="Acervus"
 DISTRIB_RELEASE="0.1"
-DISTRIB_CODENAME="hoard"
+DISTRIB_CODENAME="rolling"
 DISTRIB_DESCRIPTION="A spin of Arch Linux designed to pack as much useful software as possible while still staying relatively lightweight."
 EOF
 
@@ -19,7 +19,7 @@ NAME="Acervus"
 VERSION="0.1"
 ID=acervus
 PRETTY_NAME="Acervus v0.1"
-VERSION_CODENAME="hoard"
+VERSION_CODENAME="rolling"
 EOF
 
 echo "Modifying config..."
