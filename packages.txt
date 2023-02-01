@@ -93,6 +93,8 @@ thunderbird
 neovim
 python
 python-pip
+nodejs
+npm
 kitty
 # Other apps
 tor
@@ -185,3 +187,8 @@ john
 sqlmap
 # Bootloader stuff
 grub
+# AstroNvim reccomended packages
+ripgrep
+lazygit
+gdu
+bottom
