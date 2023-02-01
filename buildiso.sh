@@ -6,6 +6,22 @@ cp -r /usr/share/archiso/configs/baseline/ acervus-conf
 cd acervus-conf
 echo "Done."
 
+# Change lsb-release and os-release
+cat > ./airootfs/etc/lsb-release << "EOF"
+DISTRIB_ID="Acervus"
+DISTRIB_RELEASE="0.1"
+DISTRIB_CODENAME="hoard"
+DISTRIB_DESCRIPTION="A spin of Arch Linux designed to pack as much useful software as possible while still staying relatively lightweight."
+EOF
+
+cat > ./airootfs/etc/os-release << "EOF"
+NAME="Acervus"
+VERSION="0.1"
+ID=acervus
+PRETTY_NAME="Acervus v0.1"
+VERSION_CODENAME="hoard"
+EOF
+
 echo "Modifying config..."
 # Modify pacman.conf
 cp ../pacman.conf ./pacman.conf
