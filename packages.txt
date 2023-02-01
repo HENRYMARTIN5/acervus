@@ -21,7 +21,6 @@ zsh
 zsh-completions
 fish
 # Desktop stuff
-gnome
 budgie-desktop
 budgie-extras
 budgie-backgrounds
