@@ -60,6 +60,9 @@ A couple of highlights:
 - A full Budgie desktop environment
 - A ton of web browsers including Firefox, Brave, and Tor
 - A lot of fonts
+- Starship on bash, zsh, and fish with a single consistent configuration
+- Useful aliases for bash and zsh (see below)
+- AstroNvim pre-installed
 - Lots of emulators including Cemu (Wii U), Dolphin (Wii and Gamecube) and RetroArch with a bunch of cores
 - The Steam client and winetricks preinstalled, plus Lutris and MultiMc (Minecraft launcher)
 - Some other apps: Spotify, Discord, Amarok, VLC
