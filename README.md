@@ -66,3 +66,14 @@ A couple of highlights:
 - Uses Nemo as a file explorer and contains various productivity apps, like Libreoffice, GIMP and Inkscape
 - Contains way too many command-line utilities (neofetch, nvim, git, wget, zsh and zsh-completions, fish, various archive formats, htop, ncdu, tcpdump, expac)
 - A bunch of tools that I stole from Kali (all jokes aside, this includes metasploit, nmap, netcat, wireshark, and some others)
+
+## Bash/Zsh Aliases
+
+- `lt` - Shows a nice looking `ls` output with file sizes
+- `showmnt` - Shows a list of mounted block devices
+- `findh` - Finds a string in bash_history
+- `ve` - Creates a python3 virtual environment
+- `va` - Activates a python3 virtual environment
+- `cpv` - Like `cp`, but with a progress bar
+- `cl` - `cd` into a directory, then immediately run `ls`
+- `mp` - Just `mkdir -p`

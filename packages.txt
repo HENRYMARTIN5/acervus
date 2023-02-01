@@ -146,7 +146,10 @@ ttf-ubuntu-nerd
 dina-font
 tamsyn-font
 terminus-font
+# Arch tools
 archiso
+# Shell prompt stuff
+starship
 # AUR packages
 ttf-ms-fonts
 yay
