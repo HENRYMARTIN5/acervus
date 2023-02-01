@@ -180,3 +180,5 @@ aircrack-ng
 gnu-netcat
 john
 sqlmap
+# Bootloader stuff
+grub
