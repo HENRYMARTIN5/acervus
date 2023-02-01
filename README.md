@@ -77,3 +77,4 @@ A couple of highlights:
 - `cpv` - Like `cp`, but with a progress bar
 - `cl` - `cd` into a directory, then immediately run `ls`
 - `mp` - Just `mkdir -p`
+- `vim` - Points to `nvim`

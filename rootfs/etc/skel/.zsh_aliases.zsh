@@ -15,3 +15,4 @@ function cl() {
 	ls -F --color=auto
 }
 alias md='mkdir -p'
+alias vim='nvim'
