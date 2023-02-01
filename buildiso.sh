@@ -6,26 +6,13 @@ cp -r /usr/share/archiso/configs/baseline/ acervus-conf
 cd acervus-conf
 echo "Done."
 
-# Change lsb-release and os-release
-cat > ./airootfs/etc/lsb-release << "EOF"
-DISTRIB_ID="Acervus"
-DISTRIB_RELEASE="0.1"
-DISTRIB_CODENAME="rolling"
-DISTRIB_DESCRIPTION="A spin of Arch Linux designed to pack as much useful software as possible while still staying relatively lightweight."
-EOF
-
-cat > ./airootfs/etc/os-release << "EOF"
-NAME="Acervus"
-VERSION="0.1"
-ID=acervus
-PRETTY_NAME="Acervus v0.1"
-VERSION_CODENAME="rolling"
-EOF
+echo "Copying rootfs template..."
+cp -r ../rootfs/ ./airootfs/
+echo "Done."
 
 echo "Modifying config..."
 # Modify pacman.conf
 cp ../pacman.conf ./pacman.conf
-cp ../pacman.conf ./airootfs/etc/pacman.conf
 
 # Modify package list
 echo $(grep -o '^[^#]*' ../packages.txt) > ./packages.x86_64 # Weird syntax removes comments
@@ -70,19 +57,6 @@ ln -s ./airootfs/etc/systemd/system/dbus-org.bluez.service ./airootfs/usr/lib/sy
 ln -s ./airootfs/etc/systemd/system/bluetooth.target.wants/bluetooth.service ./airootfs/usr/lib/systemd/system/bluetooth.service
 #################################
 echo "Done."
-echo "Tweaking other config files..."
-# Enable command-not-found and autocd
-echo "
-source /usr/share/doc/pkgfile/command-not-found.bash" >> ./airootfs/etc/bash.bashrc
-echo "
-shopt -s autocd" >> /etc/bash.bashrc
-
-# Fix pulseaudio auto-mute
-mkdir -p ./airootfs/etc/pulse/default.pa.d
-echo "unload-module module-role-cork" > ./airootfs/etc/pulse/default.pa.d/no-cork.pa
-echo "Done."
-echo "Installing acervus-update..."
-cp ../acervus-update ./airootfs/bin/acervus-update
 
 echo "Running mkarchiso on generated config..."
 # Make the actual iso

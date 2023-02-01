@@ -1,0 +1,4 @@
+DISTRIB_ID="Acervus"
+DISTRIB_RELEASE="0.1"
+DISTRIB_CODENAME="rolling"
+DISTRIB_DESCRIPTION="A spin of Arch Linux designed to pack as much useful software as possible while still staying relatively lightweight."
