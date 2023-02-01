@@ -88,4 +88,4 @@ echo "Running mkarchiso on generated config..."
 # Make the actual iso
 mkarchiso -v -w ./acervus-iso-tmp $(pwd)
 cd ..
-echo "Done building Acervus. ISO should be located in current directory."
+echo "Done building Acervus. The ISO should be located in your current directory."
