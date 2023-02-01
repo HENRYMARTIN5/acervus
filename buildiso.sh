@@ -81,6 +81,9 @@ shopt -s autocd" >> /etc/bash.bashrc
 mkdir -p ./airootfs/etc/pulse/default.pa.d
 echo "unload-module module-role-cork" > ./airootfs/etc/pulse/default.pa.d/no-cork.pa
 echo "Done."
+echo "Installing acervus-update..."
+cp ../acervus-update ./airootfs/bin/acervus-update
+
 echo "Running mkarchiso on generated config..."
 # Make the actual iso
 mkarchiso -v -w ./acervus-iso-tmp $(pwd)
