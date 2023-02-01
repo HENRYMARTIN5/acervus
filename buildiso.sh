@@ -3,7 +3,7 @@
 # Copy the default config to the repo directory
 echo "Copying baseline config..."
 cp -r /usr/share/archiso/configs/baseline/ acervus-conf
-cd acervus-conf
+cd acervus-conf || exit
 echo "Done."
 
 echo "Copying rootfs template..."
@@ -15,7 +15,7 @@ echo "Modifying config..."
 cp ../pacman.conf ./pacman.conf
 
 # Modify package list
-echo $(grep -o '^[^#]*' ../packages.txt) > ./packages.x86_64 # Weird syntax removes comments
+grep -o '^[^#]*' ../packages.txt > ./packages.x86_64 # Weird syntax removes comments
 
 # Modify profiledef.sh
 cp ../profiledef.sh ./profiledef.sh
@@ -60,6 +60,6 @@ echo "Done."
 
 echo "Running mkarchiso on generated config..."
 # Make the actual iso
-mkarchiso -v -w ./acervus-iso-tmp $(pwd)
+mkarchiso -v -w ./acervus-iso-tmp "$(pwd)"
 cd ..
 echo "Done building Acervus. The ISO should be located in your current directory."
