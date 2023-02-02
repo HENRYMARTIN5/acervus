@@ -84,6 +84,7 @@ zip
 winetricks
 lutris
 steam
+0ad # Awesome strategy game
 # Productivity and media players
 nemo
 amarok
