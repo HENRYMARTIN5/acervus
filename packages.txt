@@ -84,7 +84,7 @@ zip
 winetricks
 lutris
 steam
-0ad # Awesome strategy game
+# 0ad - Removed due to storage concerns
 # Productivity and media players
 nemo
 amarok
