@@ -64,7 +64,7 @@ A couple of highlights:
 - Useful aliases for bash and zsh (see below)
 - AstroNvim pre-installed (additional plugins will be installed on first launch)
 - Lots of emulators including Cemu (Wii U), Dolphin (Wii and Gamecube) and RetroArch with a bunch of cores
-- The Steam client and winetricks preinstalled, plus Lutris and MultiMc (Minecraft launcher)
+- The Steam client and winetricks preinstalled, plus Lutris, MultiMc (Minecraft launcher), and 0ad (an open-source strategy game)
 - Some other apps: Spotify, Discord, Amarok, VLC
 - Uses Nemo as a file explorer and contains various productivity apps, like Libreoffice, GIMP and Inkscape
 - Contains way too many command-line utilities (neofetch, nvim, git, wget, zsh and zsh-completions, fish, various archive formats, htop, ncdu, tcpdump, expac)
