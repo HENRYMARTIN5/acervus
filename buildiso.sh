@@ -14,8 +14,8 @@ echo "Modifying config..."
 # Modify pacman.conf
 cp ../pacman.conf ./pacman.conf
 
-# Modify package list
-grep -o '^[^#]*' ../packages.txt > ./packages.x86_64 # Weird syntax removes comments
+# Mogrep -o '^[^#]*' ../packages.txt > ./packages.x86_64dify package list
+ # Weird syntax removes comments
 
 # Modify profiledef.sh
 cp ../profiledef.sh ./profiledef.sh

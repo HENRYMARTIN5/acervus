@@ -9,22 +9,22 @@ fi
 
 # The file is downloaded onto tmpfs to avoid unneccecary issues
 mkdir -p /tmp/acervus-update
-pushd /tmp/acervus-update
+pushd /tmp/acervus-update || exit
 curl https://raw.githubusercontent.com/HENRYMARTIN5/acervus/main/packages.txt --output packages.txt
 
 # Remove comments from the file
-echo $(grep -o '^[^#]*' ./packages.txt) > ./packages.x86_64 
+grep -o '^[^#]*' ./packages.txt > ./packages.x86_64
 
 # Go line-by-line through the file and find packages that need to be installed
 while read -r line
 do
   # Check if the package is installed
   echo "Checking package $line..."
-  if pacman -Qs $line > /dev/null ; then
+  if pacman -Qs "$line" > /dev/null ; then
     echo "$line is already installed."
   else
     echo "$line is not installed, installing now..."
-    pacman -S $line
+    pacman -S "$line"
   fi
 done < "/tmp/acervus-update/packages.x86_64"
 
@@ -32,4 +32,4 @@ done < "/tmp/acervus-update/packages.x86_64"
 pacman -Syu
 
 # And return back to the original directory
-popd
+popd || exit
