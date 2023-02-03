@@ -1,9 +1,14 @@
 # Base packages included in baseline
 base
 base-devel
+linux
+linux-firmware
+linux-headers
+man-db
+man-pages
+bash-completion
 cloud-init
 hyperv
-linux
 mkinitcpio
 mkinitcpio-archiso
 open-vm-tools
@@ -108,7 +113,6 @@ musl
 tcpdump
 networkmanager
 dhcpcd
-linux-headers
 dkms
 jshon
 expac
