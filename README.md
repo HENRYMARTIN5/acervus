@@ -52,6 +52,16 @@ Then run:
 
 The ISO will be built in a temporary folder (which you can delete once you're done), then copied to your current directory.
 
+## Installation
+
+Burn the ISO to a USB drive, reboot, and boot from it. Open up a terminal and run:
+
+```bash
+acervus-install
+```
+
+It will walk you through selecting a drivfe to install on, choosing a timezone and a hostname, and setting up a root password and a user account. Grub is, by default, installed with its normal text-based configuration. If you want to, you can install custom themes after the system is properly installed. Sadly, due to the limitations of the automatic installation tool at the moment, you can only format an entire drive, not dualboot.
+
 ## What packages are installed?
 
 See `packages.txt` for full details. As of Jan 31, 2023, there are 153 packages.
