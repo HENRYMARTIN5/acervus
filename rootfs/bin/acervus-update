@@ -24,12 +24,12 @@ do
     echo "$line is already installed."
   else
     echo "$line is not installed, installing now..."
-    pacman -S "$line"
+    pacman -S "$line" --noconfirm
   fi
 done < "/tmp/acervus-update/packages.x86_64"
 
 # Now update the rest of the packages
-pacman -Syu
+pacman -Syu --noconfirm
 
 # And return back to the original directory
 popd || exit
