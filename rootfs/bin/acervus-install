@@ -1,0 +1,223 @@
+#!/bin/python3
+
+import os, sys, shutil
+import subprocess
+
+# Install missing packages
+try:
+    from simple_term_menu import TerminalMenu
+    from tqdm import tqdm
+    import psutil
+except Exception as e:
+    os.system("/bin/python3 -m pip install simple_term_menu tqdm psutil")
+    os.execv(sys.argv[0], sys.argv)
+    sys.exit()
+
+# Download the git repo
+try:
+    os.system("rm -Rf /tmp/acervus-install")
+except:
+    pass
+os.chdir("/tmp")
+os.system("git clone https://github.com/HENRYMARTIN5/acervus.git acervus-install")
+os.chdir("/tmp/acervus-install")
+os.system("clear")
+os.system("grep -o '^[^#]*' ./packages.txt > ./packages.x86_64")
+
+
+def main():
+    options = ["[b] Begin installation", "[c] Change included packages", "[x] Exit"]
+    terminal_menu = TerminalMenu(options)
+    menu_entry_index = terminal_menu.show()
+    if menu_entry_index == 0:
+        install()
+    elif menu_entry_index == 1:
+        chincluded()
+        main()
+    elif menu_entry_index == 2:
+        os.system("clear")
+        sys.exit()
+
+def chincluded():
+    options = ["[v] See current packages", "[a] Add package", "[b] Back"]
+    terminal_menu = TerminalMenu(options)
+    menu_entry_index = terminal_menu.show()
+    if menu_entry_index == 0:
+        with open("packages.x86_64", "r") as f:
+            for line in f.readlines():
+                sys.stdout.write(line)
+        input("\n      Press enter to return")
+        os.system("clear")
+        print("Acervus Automated Installer")
+        chincluded()
+    elif menu_entry_index == 1:
+        pkg = input(" Package name to be added:\n  > ")
+        with open("packages.x86_64", "a") as f:
+            f.write(pkg)
+        os.system("clear")
+        print("Acervus Automated Installer")
+    elif menu_entry_index == 2:
+        os.system("clear")
+        print("Acervus Automated Installer")
+    
+def install():
+    os.system("clear")
+    print("Acervus Automated Installer")
+    diskparts = psutil.disk_partitions()
+    options = []
+    for i in diskparts:
+        options.append(i.device)
+    terminal_menu = TerminalMenu(options, title=" Select a Device")
+    menu_entry_index = terminal_menu.show()
+    device = options[menu_entry_index]
+    print(" Installing on " + device)
+    contyn = input(" All data on the selected device will be ERASED FOREVER (a long time!)\n Are you sure you want to continue? [y/N] ")
+    if contyn.lower() == "" or contyn.lower() == "n":
+        print(" Canceled acervus-install.")
+        sys.exit()
+    print(" Partitioning " + device + "...")
+    # Create required partitions
+    try:
+        partition(device)
+    except:
+        print("  FATAL: Failed to partition drive " + device)
+        sys.exit(1)
+    # Create filesystem
+    try:
+        createfs(device)
+    except:
+        print("  FATAL: Failed to create filesystem on " + device)
+        sys.exit(1)
+    # Mount and pacstrap
+    try:
+        mountandpacstrap(device, device + "2", device + "1")
+    except:
+        print("  FATAL: Failed to mount and pacstrap " + device)
+        sys.exit(1)
+    # Prompt user for timezone
+    timezone = input(" Choose a timezone (Ex. America/Chicago, America/New_York, etc.)\n  > ")
+    hostname = input(" Choose a hostname\n  > ")
+    root_password = input(" Choose a root password\n  > ")
+    username = input(" Choose a username\n  > ")
+    user_password = input(" Choose a password for that user\n  > ")
+    try:
+        configure_system(timezone, hostname, root_password, username, user_password, device)
+    except:
+        print("  FATAL: Failed to perform chroot configuration - partitions should be automatically unmounted.")
+        unmount()
+        sys.exit(1)
+    os.system("clear")
+    print("Acervus Automated Installer")
+    options = ["[x] Exit Installer", "[r] Reboot Now"]
+    terminal_menu = TerminalMenu(options)
+    menu_entry_index = terminal_menu.show()
+    if menu_entry_index == 0:
+        sys.exit()
+    elif menu_entry_index == 1:
+        print("The system will reboot in 3 seconds (after this script has exited).")
+        os.system("(sleep 3 && shutdown -r now) &")
+        sys.exit()
+
+
+def partition(disk_name):
+    # Delete the existing partition table
+    result = subprocess.run(["parted", disk_name, "mklabel", "gpt"])
+    if result.returncode != 0:
+        raise Exception("Failed to delete existing partition table")
+    # Create the first partition
+    result = subprocess.run(["parted", disk_name, "mkpart", "primary", "fat32", "1MiB", "513MiB"])
+    if result.returncode != 0:
+        raise Exception("Failed to create first partition")
+    # Create the second partition
+    result = subprocess.run(["parted", disk_name, "mkpart", "primary", "ext4", "513MiB", "-1"])
+    if result.returncode != 0:
+        raise Exception("Failed to create second partition")
+
+def createfs(disk_name):
+    # Create EFI partition (fat32)
+    result = subprocess.run(["mkfs.fat", "-F32", disk_name + "1"])
+    if result.returncode != 0:
+        raise Exception("Failed to create FAT filesystem")
+    # Create ext4 partition (rootfs)
+    result = subprocess.run(["mkfs.ext4", disk_name + "2"])
+    if result.returncode != 0:
+        raise Exception("Failed to create ext4 filesystem")
+
+def mountandpacstrap(disk_name, root_partition, efi_partition):
+    # Create the mount points
+    result = subprocess.run(["mkdir", "-p", "/mnt/acervus-install/efi"])
+    if result.returncode != 0:
+        raise Exception("Failed to create mount points")
+    # Mount the root partition
+    result = subprocess.run(["mount", root_partition, "/mnt/acervus-install"])
+    if result.returncode != 0:
+        raise Exception("Failed to mount root partition")
+    # Mount the EFI partition
+    result = subprocess.run(["mount", efi_partition, "/mnt/acervus-install/efi"])
+    if result.returncode != 0:
+        raise Exception("Failed to mount EFI partition")
+    # Copy the rootfs template over
+    source_folder = "/tmp/acervus-install/rootfs"
+    destination_folder = "/mnt/acervus-install"
+    for file_name in os.listdir(source_folder):
+        # construct full file path
+        source = source_folder + file_name
+        destination = destination_folder + file_name
+        # copy only files
+        if os.path.isfile(source):
+            shutil.copy(source, destination)
+            print('   Copied file: ', file_name)
+    # Install base packages
+    result = subprocess.run(["pacstrap", "/mnt/acervus-install", "base base-devel linux linux-firmware linux-headers man-db man-pages bash-completion"])
+    if result.returncode != 0:
+        raise Exception("Failed to install base packages")
+    # Generate fstab
+    result = subprocess.run(["genfstab", "-U", "/mnt/acervus-install", ">>", "/mnt/acervus-install/etc/fstab"])
+    if result.returncode != 0:
+        raise Exception("Failed to generate fstab")
+
+def configure_system(timezone, hostname, root_password, username, user_password, drive):
+    # arch-chroot into the new system root directory
+    process = subprocess.Popen(["bash"], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+    commands = f"""
+        arch-chroot /mnt/acervus-install
+        ln -sf /usr/share/zoneinfo/{timezone} /etc/localtime
+        hwclock --systohc
+        echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+        locale-gen
+        echo "LANG=en_US.UTF-8" > /etc/locale.conf
+        echo "KEYMAP=us" > /etc/vconsole.conf
+        echo {hostname} > /etc/hostname
+        echo "127.0.0.1 localhost" >> /etc/hosts
+        echo "::1 localhost" >> /etc/hosts
+        echo "root:{root_password}" | chpasswd
+        useradd -m {username}
+        usermod -aG wheel,audio,video,optical,storage {username}
+        echo "{username}:{user_password}" | chpasswd
+        sed -i 's/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g' /etc/sudoers
+        /bin/acervus-update
+        pacman -S grub os-prober freetype2 dosfstools --noconfirm
+        grub-install {drive}
+        grub-mkconfig -o /boot/grub/grub.cfg
+        pacman -S dhcpcd net-tools netctl dialog wpa_supplicant networkmanager nm-connection-editor inetutils ifplugd --noconfirm
+        systemctl enable dhcpcd
+        systemctl enable NetworkManager
+        systemctl enable gdm
+        systemctl enable acpid
+        systemctl enable avahi-daemon
+        systemctl enable cups.service
+        systemctl enable bluetooth
+        exit
+        exit
+    """
+    process.stdin.write(commands.encode())
+    process.stdin.close()
+    process.wait()
+
+def unmount():
+    os.system("umount /mnt/acervus-install/efi")
+    os.system("umount /mnt/acervus-install")
+
+if __name__ == "__main__":
+    print("Acervus Automated Installer")
+    main()
