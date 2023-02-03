@@ -13,6 +13,9 @@ except Exception as e:
     os.execv(sys.argv[0], sys.argv)
     sys.exit()
 
+if not os.geteuid()==0:
+    sys.exit('This script must be run as root!')
+
 # Download the git repo
 try:
     os.system("rm -Rf /tmp/acervus-install")

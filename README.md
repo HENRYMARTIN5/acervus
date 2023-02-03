@@ -64,7 +64,7 @@ It will walk you through selecting a drivfe to install on, choosing a timezone a
 
 ## What packages are installed?
 
-See `packages.txt` for full details. As of Jan 31, 2023, there are 153 packages.
+See `packages.txt` for full details. As of Feb 3, 2023, there are 176 packages.
 
 A couple of highlights:
 - A full Budgie desktop environment
