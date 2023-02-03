@@ -186,8 +186,9 @@ aircrack-ng
 gnu-netcat
 john
 sqlmap
-# Bootloader stuff
+# Auto-installation stuff
 grub
+parted
 # AstroNvim reccomended packages
 ripgrep
 lazygit
