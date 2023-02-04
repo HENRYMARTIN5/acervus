@@ -124,14 +124,14 @@ xdg-user-dirs
 system-config-printer
 foomatic-db
 foomatic-db-engine
-gutenprint gsfonts
+gutenprint
+gsfonts
 cups
 cups-pdf
 cups-filters
 sane
 simple-scan
 hplip
-wireless-tools
 wpa_supplicant
 dialog
 nfs-utils
@@ -171,17 +171,17 @@ jdk
 downgrade
 icecat
 # Emulators
-cemu # Wii U
-dolphin-emu # Wii and Gamecube
+cemu
+dolphin-emu
 retroarch
-libretro-citra # 3DS
+libretro-citra
 citra-canary-git
-yuzu-mainline-bin # Switch
-libretro-mupen64plus-next-git # N64
-libretro-mesen-git # NES
-libretro-opera-git # 4D0/libfreedo
-libretro-stella2014-git # Atari 2600
-libretro-mgba # GBA
+yuzu-mainline-bin
+libretro-mupen64plus-next-git
+libretro-mesen-git
+libretro-opera-git
+libretro-stella2014-git
+libretro-mgba
 # Stuff I stole from Kali
 nmap
 metasploit
