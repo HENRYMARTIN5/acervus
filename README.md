@@ -15,12 +15,15 @@ sudo docker pull archlinux
 sudo docker run -i -t archlinux bash
 # (inside the container)
 pacman -Sy sudo # Install sudo and update package database
-sudo pacman -S git wget curl archiso pacman-contrib squashfs-tools # Install needed packages
 ```
 
 From here, the steps are the same. Since Acervus uses Chaotic-AUR to download prebuilt AUR packages, you need to install its keyring on the system you're using to build it. Run the following:
 
 ```bash
+# If you're running as a non-root user:
+sudo su
+# Then run the rest as normal:
+pacman -S git wget curl archiso pacman-contrib squashfs-tools # Install needed packages
 pacman-key --init
 pacman-key --recv-key FBA220DFC880C036 --keyserver keyserver.ubuntu.com
 pacman-key --lsign-key FBA220DFC880C036 # If pacman outputs an error, run pacman-key --init again
