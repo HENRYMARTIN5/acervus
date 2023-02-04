@@ -1,6 +1,10 @@
 # Acervus
 A spin of Arch Linux designed to pack as much useful software into a single ISO as possible while still staying relatively lightweight.
 
+## Download
+The latest ISO is available here:
+https://mega.nz/file/vMJ0Ra7Y#58ep0req1fwoQJsSNbI0iMys6eICPmdoYaCBCFoh8CQ
+
 ## Building
 In order to build Acervus, you need an environment running Arch Linux or an Arch-based distro, such as Manjaro, Crystal, or a pre-existing installation of Acervus. If you're running on a fresh install of Arch, you'll need to install quite a few packages before you start. The magic command to do that automatically is:
 
