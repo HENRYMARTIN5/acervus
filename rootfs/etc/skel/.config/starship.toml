@@ -1,0 +1,56 @@
+format = "$username@$hostname$directory$git_branch$git_status$git_state$nodejs$python$env_var\\$ "
+add_newline = false
+
+[username]
+show_always = true
+style_user = "cyan"
+format = "[$user]($style)"
+
+[hostname]
+ssh_only = false
+style = "yellow"
+format = "[$hostname:]($style)"
+
+[directory]
+style = "green"
+truncation_length = 10
+truncate_to_repo = false
+
+[git_branch]
+style = "cyan"
+format = "[git:\\($branch\\)]($style)"
+
+[git_status]
+format = "[($conflicted$untracked$modified$staged$renamed$deleted)]($style) "
+style = "cyan"
+conflicted = "*"
+untracked = "*"
+modified = "*"
+staged = "*"
+renamed = "*"
+deleted = "*"
+stashed = ""
+
+[git_state]
+style = "bold cyan"
+format = "[\\($state( $progress_current/$progress_total)\\)]($style) "
+
+[gcloud]
+style = "purple"
+format = "[\\($project\\)]($style) "
+
+[nodejs]
+style = "purple"
+version_format = "$major.$minor"
+format = "[\\[$version\\]]($style) "
+
+[python]
+pyenv_version_name = true
+style = "purple"
+version_format = "$major.minor"
+format = "[\\[$version\\]( \\($virtualenv\\))]($style) "
+
+[env_var]
+variable = "SHELL_ARCH"
+style = "yellow"
+format = "[\\($env_value\\)]($style) "
