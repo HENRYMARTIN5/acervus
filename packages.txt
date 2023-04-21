@@ -198,3 +198,34 @@ ripgrep
 lazygit
 gdu
 bottom
+# Emulation/Virtualization
+qemu-full
+virtualbox
+# Archives
+tar
+gzip
+bzip2
+# Stuff that ChatGPT suggested
+ranger
+fzf
+ripgrep-all
+exa
+bat
+fd
+nmon
+tree
+scrot
+tldr
+zoxide
+bashtop
+bpytop
+gtop
+mosh
+pandoc
+imagemagick
+audacity
+obs-studio
+calibre
+lxc
+conky
+ungoogled-chromium
