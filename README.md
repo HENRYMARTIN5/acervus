@@ -1,5 +1,6 @@
 # Acervus
-A spin of Arch Linux designed to pack as much useful software into a single ISO as possible while still staying relatively lightweight.
+
+A spin of Arch Linux designed to include as much software out-of-the-box as possible.
 
 ## Installation
 
