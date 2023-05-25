@@ -1,4 +1,14 @@
-# Acervus
+```
+
+      O~                                                              O~~                                   
+     O~ ~~                                                            O~~       O~                          
+    O~  O~~       O~~~   O~~    O~ O~~~O~~     O~~O~~  O~~ O~~~~      O~~         O~~ O~~  O~~  O~~O~~   O~~
+   O~~   O~~    O~~    O~   O~~  O~~    O~~   O~~ O~~  O~~O~~         O~~      O~~ O~~  O~~O~~  O~~  O~ O~~ 
+  O~~~~~~ O~~  O~~    O~~~~~ O~~ O~~     O~~ O~~  O~~  O~~  O~~~      O~~      O~~ O~~  O~~O~~  O~~   O~    
+ O~~       O~~  O~~   O~         O~~      O~O~~   O~~  O~~    O~~     O~~      O~~ O~~  O~~O~~  O~~ O~  O~~ 
+O~~         O~~   O~~~  O~~~~   O~~~       O~~      O~~O~~O~~ O~~     O~~~~~~~~O~~O~~~  O~~  O~~O~~O~~   O~~
+                                                                                                            
+```
 
 A spin of Arch Linux designed to include as much software out-of-the-box as possible.
 
